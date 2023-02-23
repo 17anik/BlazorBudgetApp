@@ -1,4 +1,7 @@
-﻿namespace BlazorBudgetApp.Data
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using System.Diagnostics;
+
+namespace BlazorBudgetApp.Data
 {
     public class budgetBookService
     {
@@ -23,6 +26,18 @@
             Entry entry = mockDb[Id];
             mockDb.Remove(entry);
             return true;
+        }
+
+        public async Task<decimal> GetTotal()
+        {
+            decimal total = 0;
+            foreach (var entry in mockDb)
+            {
+                total += entry.Amount;
+            }
+            return total;
+
+        
         }
     }
 }
