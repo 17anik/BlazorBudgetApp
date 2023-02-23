@@ -4,7 +4,7 @@
     {
         private static List<Entry> mockDb = new List<Entry>()
         {
-            new Entry(){Description="Howgarts Legacy",Amount=3499m}
+            new Entry(){Id=1,Description="Howgarts Legacy",Amount=3499m}
         };
 
         public async Task<bool> AddEntry(Entry newEntry)
@@ -16,6 +16,13 @@
         public async Task<List<Entry>> GetAllEntries()
         {
             return mockDb;
+        }
+
+        public async Task<bool> DeleteEntry(int Id)
+        {
+            Entry entry = mockDb[Id];
+            mockDb.Remove(entry);
+            return true;
         }
     }
 }

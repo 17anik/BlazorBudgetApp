@@ -28,16 +28,20 @@
 <table class="table table-striped table-bordered mt-2">
     <thead class="table-dark">
         <tr>
+            <th>Id</th>
             <th>Amount</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var entry in allEntries)
         {
             <tr>
+                <td>@entry.Id</td>
                 <td>@entry.Amount</td>
                 <td>@entry.Description</td>
+                <td><button class="btn btn-danger" @onclick="@(e => DeleteEntry(entry.Id))">Delete</button></td>
             </tr>
         }
     </tbody>
@@ -58,5 +62,10 @@
     protected async void CreateEntry()
     {
         await BudgetBookService.AddEntry(newEntry);
+    }
+
+    protected async void DeleteEntry(int Id)
+    {
+        await BudgetBookService.DeleteEntry(Id);
     }
 }
