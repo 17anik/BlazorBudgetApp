@@ -36,8 +36,6 @@ namespace BlazorBudgetApp.Data
                 total += entry.Amount;
             }
             return total;
-
-        
         }
     }
 }
