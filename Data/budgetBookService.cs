@@ -23,7 +23,7 @@ namespace BlazorBudgetApp.Data
 
         public async Task<bool> DeleteEntry(int Id)
         {
-            Entry entry = mockDb[Id];
+            Entry entry = mockDb.FirstOrDefault(e => e.Id == Id);
             mockDb.Remove(entry);
             return true;
         }

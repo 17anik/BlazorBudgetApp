@@ -40,7 +40,7 @@
                 <td>@entry.Amount</td>
                 <td>@entry.Description</td>
                 <td>
-                    <button class="btn btn-outline-danger btn-sm" @onclick="@(e => DeleteEntry(entry.Id))">Delete</button>
+                    <button class="btn btn-outline-danger btn-sm" @onclick="() => DeleteEntry(entry.Id)">Delete</button>
                 </td>
             </tr>
         }
