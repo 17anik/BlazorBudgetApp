@@ -1,0 +1,49 @@
+﻿@page "/editrecords"
+@page "/editrecords/{Id:int}"
+
+@using BlazorBudgetApp.Data
+@inject budgetBookService BudgetBookService
+@inject NavigationManager navigationManger
+
+<h3>EditRecords</h3>
+
+<form>
+    <div class="row">
+        <div class="col">
+            <label class="control-label">Amount</label>
+            <input class="form-control" placeholder="@entry.Amount" @bind="@modifiedEntry.Amount" />
+        </div>
+        <div class="col">
+            <label class="control-label">Description</label>
+            <input class="form-control" placeholder="@entry.Description" @bind="@modifiedEntry.Description" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button class="btn btn-primary" @onclick="() => SaveChanges(Id,modifiedEntry.Description, modifiedEntry.Amount) ">Save Changes</button>
+        </div>
+    </div>
+</form>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    Entry entry = new Entry();
+    Entry modifiedEntry = new Entry();
+
+    protected override async Task OnInitializedAsync()
+    {
+        entry = await BudgetBookService.GetEntryById(Id);
+    }
+
+    protected async Task SaveChanges(int Id, string? desc, decimal amt)
+    {
+        bool check = await BudgetBookService.EditEntry(Id, desc, amt);
+
+        if (check)
+        {
+            navigationManger.NavigateTo("/", true);
+        }
+    }
+}
