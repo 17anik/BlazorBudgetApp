@@ -1,21 +1,23 @@
-﻿@page "/editrecords"
-@page "/editrecords/{Id:int}"
+﻿@page "/editrecords/{Id:int}"
 
 @using BlazorBudgetApp.Data
+@using Blazored.Toast.Services;
+
 @inject budgetBookService BudgetBookService
 @inject NavigationManager navigationManger
+@inject IToastService toastService
 
 <h3>EditRecords</h3>
 
 <form>
     <div class="row">
         <div class="col">
-            <label class="control-label">Amount</label>
-            <input class="form-control" placeholder="@entry.Amount" @bind="@modifiedEntry.Amount" />
+            <label class="control-label">Description</label>
+            <input class="form-control" type="text" placeholder="@entry.Description" @bind="@modifiedEntry.Description" />
         </div>
         <div class="col">
-            <label class="control-label">Description</label>
-            <input class="form-control" placeholder="@entry.Description" @bind="@modifiedEntry.Description" />
+            <label class="control-label">Amount</label>
+            <input class="form-control" type="number" placeholder="@entry.Amount" @bind="@modifiedEntry.Amount" />
         </div>
     </div>
     <div class="row mt-2">
